@@ -26,21 +26,21 @@ if eleccion == 1:
     precio = float(input("precio: $"))
     categoria = input("Categoria: ")
     nuevoProducto = producto.Producto(nombre, descripcion, precio, categoria)
-    conector.guardar(nuevoProducto)
+    conector.guardarProducto(nuevoProducto)
 
 elif eleccion == 2:
-    for articulo in conector.mostrar():
+    for articulo in conector.mostrar("productos"):
         productoAMostrar = producto.Producto(articulo[1],articulo[2],articulo[3],articulo[4])
         print (productoAMostrar.datos())
 elif eleccion == 3:
     print ("##### ELIMINAR PRODUCTO #####")
     productoAEliminar = input("nombre: ")
-    conector.eliminar(productoAEliminar)
+    conector.eliminar(productoAEliminar,"productos")
 elif eleccion == 4:
     print ("##### MODIFICAR PRODUCTO #####")
-    for articulo in conector.mostrar():
+    for articulo in conector.mostrar("productos"):
         print("\n- " + articulo[1])
     nombre = input("Nombre: ")
     columna = input("elije la seccion a modificar: ")
     nuevoValor = input("Ingrese la nueva modificación: ")
-    conector.modificar(nombre, columna, nuevoValor)
+    conector.modificar(nombre, columna, nuevoValor,"productos")
