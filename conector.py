@@ -27,3 +27,10 @@ class Conector:
         sql = "DELETE FROM productos WHERE nombre = '%s' " % (nombre)
         cursor.execute(sql)
         database.commit()
+
+    def modificar(self,nombreProducto,columnaModificar,valorNuevo):
+        sql = "UPDATE productos SET %s = '%s' WHERE nombre = '%s'" % (columnaModificar,
+                                                                         valorNuevo,
+                                                                         nombreProducto)
+        cursor.execute(sql)
+        database.commit()
