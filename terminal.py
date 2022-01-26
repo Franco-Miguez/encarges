@@ -1,4 +1,5 @@
-import producto
+from elementos import producto
+
 
 class Programa:
     def __init__(self,conector):

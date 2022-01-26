@@ -1,11 +1,7 @@
-import producto
-import conector
-import entorno_grafico
+from ventanas import entorno_grafico
 
-conector = conector.Conector()
-
-programa = entorno_grafico.Programa(conector)
+programa = entorno_grafico.Programa()
 
 programa.ejecutar()
 programa.Secciones()
-programa.mostrar()
+programa.mostrarVentana()

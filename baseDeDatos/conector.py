@@ -1,8 +1,5 @@
 import mysql.connector
-import producto
-import pedido
-import compra
-import cliente
+
 database = mysql.connector.connect(
         port= 3307,
         host= "localhost",
@@ -49,8 +46,8 @@ class Conector:
         cursor.execute(sql)
         return (cursor.fetchall())
 
-    def eliminar(self,nombre,tabla):
-        sql = "DELETE FROM %s WHERE nombre = '%s' " % (tabla,nombre)
+    def eliminar(self,columna,id,tabla):
+        sql = "DELETE FROM %s WHERE %s = '%s' " % (tabla,columna,id)
         cursor.execute(sql)
         database.commit()
 
