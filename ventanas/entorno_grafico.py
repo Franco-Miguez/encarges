@@ -1,5 +1,5 @@
 from tkinter import *
-import ventanas.seccionProductos as seccionProductos
+import ventanas.producto.seccion as seccionProductos
 
 class Programa:
 
@@ -84,7 +84,7 @@ class Programa:
         self.botonUsuarios["state"] = NORMAL
         secProductos = seccionProductos.SeccionProductos(self.marcoHerramientas)
         secProductos.main()
-        secProductos.actualizarProductos()
+        secProductos.actualizarLista()
 
     def seccionCompra(self):
         self.limpiarMarco(self.marcoHerramientas)
@@ -113,3 +113,4 @@ class Programa:
     def limpiarMarco(self,marco):
         for elementos in marco.winfo_children():
             elementos.destroy()
+

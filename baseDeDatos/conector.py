@@ -46,12 +46,22 @@ class Conector:
         cursor.execute(sql)
         return (cursor.fetchall())
 
+    def buscar(self, tabla, columna, valor):
+        sql = f"SELECT * FROM {tabla} WHERE {columna} LINK '%{valor}%'"
+        cursor.execute(sql)
+        return (cursor.fetchall())
+
+    def mostrarLinea(self, tabla, columna, valor):
+        sql = "SELECT * FROM %s WHERE %s = '%s'" % (tabla,columna,valor)
+        cursor.execute(sql)
+        return (cursor.fetchall())
+
     def eliminar(self,columna,id,tabla):
         sql = "DELETE FROM %s WHERE %s = '%s' " % (tabla,columna,id)
         cursor.execute(sql)
         database.commit()
 
-    def modificar(self,nombreProducto,columnaModificar,valorNuevo,tabla):
+    def modificar(self, tabla, columnaModificar, valorNuevo, nombreProducto):
         sql = "UPDATE %s SET %s = '%s' WHERE nombre = '%s'" % (tabla,
                                                                columnaModificar,
                                                                 valorNuevo,

@@ -10,7 +10,7 @@ class Eliminar:
         self.id = id
         self.columna = columna
 
-    def eliminar(self):
+    def ventana(self):
         respuesta =  messagebox.askyesno("ELIMINAR!!", message="¿Seguro que quieres eliminarlo?")
         if respuesta:
             conector.eliminar(self.columna,self.id,self.tabla)
