@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS productos(
 
 CREATE TABLE clientes(
     id INT(20) auto_increment NOT NULL,
-    celular INT(15) NOT NULL,
+    celular VARCHAR(15) NOT NULL,
     nombre VARCHAR(255),
     CONSTRAINT pk_clientes PRIMARY KEY(id)
+    CONSTRAINT uq_celular UNIQUE(celular)
 )ENGINE=InnoDb;
 
 CREATE TABLE pedidos(

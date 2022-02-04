@@ -13,7 +13,7 @@ class VerProducto:
 
     def ventana(self):
 
-        titulo = Label(self.ventanaSecundaria, text="Información")
+        titulo = Label(self.ventanaSecundaria, text="Agregar")
         titulo.config(font=("Arial",20))
         titulo.pack(side=TOP, anchor=CENTER)
 

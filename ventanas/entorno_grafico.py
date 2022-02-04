@@ -1,5 +1,6 @@
 from tkinter import *
-import ventanas.producto.seccion as seccionProductos
+import ventanas.producto.seccion as productos
+import ventanas.usuario.seccion as usuarios
 
 class Programa:
 
@@ -82,7 +83,7 @@ class Programa:
         self.botonCompra["state"] = NORMAL
         self.botonPedidos["state"] = NORMAL
         self.botonUsuarios["state"] = NORMAL
-        secProductos = seccionProductos.SeccionProductos(self.marcoHerramientas)
+        secProductos = productos.SeccionProductos(self.marcoHerramientas)
         secProductos.main()
         secProductos.actualizarLista()
 
@@ -109,6 +110,9 @@ class Programa:
         self.botonCompra["state"] = NORMAL
         self.botonPedidos["state"] = NORMAL
         self.botonUsuarios["state"] = DISABLED
+        secUsuarios = usuarios.SeccionUsuarios(self.marcoHerramientas)
+        secUsuarios.main()
+        secUsuarios.actualizarLista()
 
     def limpiarMarco(self,marco):
         for elementos in marco.winfo_children():

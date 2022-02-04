@@ -1,14 +1,18 @@
+# por el momento comente la parte donde aparece la opcion
+# ver ya que más adelante lo agregare
+
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox as ms
 from baseDeDatos import conector
 import ventanas.ventanaEliminar as ventanaEliminar
-import ventanas.producto.ventanaAgregar as ventanaAgregar
-import ventanas.producto.ventanaVer as ventanaVer
-import ventanas.producto.ventanaModificar as ventanaModificar
+import ventanas.usuario.ventanaAgregar as ventanaAgregar
+#import ventanas.usuario.ventanaVer as ventanaVer
+import ventanas.usuario.ventanaModificar as ventanaModificar
 from texto import acortarTexto
 
-class SeccionProductos:
+
+class SeccionUsuarios:
     def __init__(self, marco):
         self.marco = marco
         self.conector = conector.Conector()
@@ -23,21 +27,17 @@ class SeccionProductos:
         botonBuscar.pack(side=TOP, anchor=CENTER)
 
         self.lista = ttk.Treeview(self.marco,
-                                  columns=("Precio",
-                                            "Descripción",
-                                            "Categoria")
+                                  columns=("Nombre")
 
                                   )
 
         self.lista.column("#0", width=300)
-        self.lista.column("Precio", width=80)
-        self.lista.column("Descripción", width=400)
-        self.lista.column("Categoria", width=150)
+        self.lista.column("Nombre", width=400)
 
-        self.lista.heading("#0", text="Nombre", anchor=CENTER)
-        self.lista.heading("Precio", text="Precio", anchor=CENTER)
-        self.lista.heading("Descripción", text="Descripción", anchor=CENTER)
-        self.lista.heading("Categoria", text="Categoria", anchor=CENTER)
+
+        self.lista.heading("#0", text="Celular", anchor=CENTER)
+        self.lista.heading("Nombre", text="Nombre", anchor=CENTER)
+
 
 
 
@@ -51,54 +51,53 @@ class SeccionProductos:
 
         self.botonAgregar = Button(self.marcoBotones, text="Agregar",
                                    command=self.agregar)
-        self.botonVer = Button(self.marcoBotones,
-                               text="Ver",
-                               command=self.ver)
+
+        # self.botonVer = Button(self.marcoBotones,
+        #                        text="Ver",
+        #                        command=self.ver)
+
         self.botonModificar = Button(self.marcoBotones, text="Modificar",
                                      command=self.modificar)
         self.botonEliminar = Button(self.marcoBotones, text="Eliminar",
                                     command=lambda: self.eliminar())
 
         self.botonAgregar.pack(side=LEFT, padx=20)
-        self.botonVer.pack(side=LEFT, padx=20)
+        # self.botonVer.pack(side=LEFT, padx=20)
         self.botonModificar.pack(side=LEFT, padx=20)
         self.botonEliminar.pack(side=LEFT, padx=20)
 
 
     def actualizarLista(self):
-        for producto in self.conector.mostrar("productos"):
-            self.lista.insert("", END, text=producto[1], values=(producto[3],
-                                                            acortarTexto(producto[2], 40),
-                                                            producto[4]))
+        for usuario in self.conector.mostrar("clientes"):
+            self.lista.insert("", END, text=usuario[1], values=(usuario[2]))
 
 
     def eliminar(self):
         try:
-            productoSeleccionado = self.selecionadoInfo()[1]
-            eliminador = ventanaEliminar.Eliminar(self.marco, "productos", productoSeleccionado, "nombre")
+            selecionado = self.selecionadoInfo()[1]
+            eliminador = ventanaEliminar.Eliminar(self.marco, "clientes", selecionado, "celular")
             if eliminador.ventana():
                 self.lista.delete(self.selecionadoInfo()[0])
         except IndexError:
             ms.showinfo("Cuidado", "No a seleccionado ningun\nelemento de la lista")
 
     def agregar(self):
-        agregar = ventanaAgregar.AgregarProducto()
+        agregar = ventanaAgregar.Agregar()
         agregar.ventana()
 
-
-    def ver(self):
-        try:
-            productoSeleccionado = self.selecionadoInfo()[1]
-            ver = ventanaVer.VerProducto(productoSeleccionado)
-            ver.ventana()
-        except IndexError:
-            ms.showinfo("Cuidado", "No a seleccionado ningun\nelemento de la lista")
+    # def ver(self):
+    #     try:
+    #         productoSeleccionado = self.selecionadoInfo()[1]
+    #         ver = ventanaVer.VerProducto(productoSeleccionado)
+    #         ver.ventana()
+    #     except IndexError:
+    #         ms.showinfo("Cuidado", "No a seleccionado ningun\nelemento de la lista")
 
 
     def modificar(self):
         try:
-            productoSeleccionado = self.selecionadoInfo()[1]
-            modificar = ventanaModificar.ModificarProducto(productoSeleccionado)
+            seleccionado = self.selecionadoInfo()[1]
+            modificar = ventanaModificar.Modificar(seleccionado)
             modificar.ventana()
         except IndexError:
             ms.showinfo("Cuidado", "No a seleccionado ningun\nelemento de la lista")
@@ -106,16 +105,12 @@ class SeccionProductos:
     def buscar(self):
         self.lista.delete(*self.lista.get_children())
         if len(self.valorBuscar.get()) > 0:
-            nuevaLista = self.conector.buscar("productos",
-                                       "nombre",
+            nuevaLista = self.conector.buscar("clientes",
+                                       "celular",
                                        self.valorBuscar.get()
                                        )
-            for producto in nuevaLista:
-                self.lista.insert("", END,
-                                  text=producto[1],
-                                  values=(producto[3],
-                                  acortarTexto(producto[2],40),
-                                  producto[4]))
+            for usuario in nuevaLista:
+                self.lista.insert("", END, text=usuario[1], values=(usuario[2]))
         else:
             self.actualizarLista()
 
@@ -124,5 +119,7 @@ class SeccionProductos:
         info.extend([self.lista.item(self.lista.selection()[0])["text"]])
         info.extend(self.lista.item(self.lista.selection()[0])['values'])
         return info
+
+
 
 

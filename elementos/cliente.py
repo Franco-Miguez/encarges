@@ -1,5 +1,5 @@
 class Cliente:
-    def __init__(self, celular, nombre, pedidos):
+    def __init__(self, celular, nombre, pedidos = []):
         self.celular = celular
         self.nombre = nombre
         self.pedidos = pedidos

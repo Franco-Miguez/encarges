@@ -13,7 +13,7 @@ class ModificarProducto:
 
     def ventana(self):
 
-        titulo = Label(self.ventanaSecundaria, text="Agregar")
+        titulo = Label(self.ventanaSecundaria, text="Modificar")
         titulo.config(font=("Arial",20))
         titulo.pack(side=TOP, anchor=CENTER)
 
@@ -53,18 +53,21 @@ class ModificarProducto:
             conector.modificar("productos",
                                "descripcion",
                                self.entradaDescripcion.get(1.0,END),
+                               "nombre",
                                self.valorNombreInicial)
 
         if self.valorPrecio != self.valorPrecioInicial:
             conector.modificar("productos",
                                "Precio",
                                self.valorPrecio.get(),
+                               "nombre",
                                self.valorNombreInicial)
 
         if self.valorNombre != self.valorNombreInicial:
             conector.modificar("productos",
                                "nombre",
                                self.valorNombre.get(),
+                               "nombre",
                                self.valorNombreInicial)
 
         self.ventanaSecundaria.destroy()

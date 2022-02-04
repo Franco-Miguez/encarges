@@ -20,9 +20,8 @@ class Conector:
         database.commit()
 
     def guardarCliente(self, cliente):
-        sql = "INSERT INTO productos (celular,nombre) VALUES (%s,%s)"
-        datos = (cliente.celular, cliente.celular)
-        cursor.execute(sql,datos)
+        sql = "INSERT INTO clientes (celular,nombre) VALUES (%s,'%s')" % (cliente.getCelular(), cliente.getNombre())
+        cursor.execute(sql)
         database.commit()
 
     def guardarPedido(self, pedido):
@@ -61,10 +60,11 @@ class Conector:
         cursor.execute(sql)
         database.commit()
 
-    def modificar(self, tabla, columnaModificar, valorNuevo, nombreProducto):
-        sql = "UPDATE %s SET %s = '%s' WHERE nombre = '%s'" % (tabla,
+    def modificar(self, tabla, columnaModificar, valorNuevo, columnaReferencia, nombreProducto):
+        sql = "UPDATE %s SET %s = '%s' WHERE %s = '%s'" % (tabla,
                                                                columnaModificar,
                                                                 valorNuevo,
+                                                                columnaReferencia,
                                                                 nombreProducto)
         cursor.execute(sql)
         database.commit()
