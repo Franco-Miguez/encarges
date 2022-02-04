@@ -27,12 +27,12 @@ class Programa:
         self.marcoSecciones = Frame(self.ventana,
                                height=40
                                )
-        self.marcoSecciones.config(bg="grey")
+
         self.marcoSecciones.pack_propagate(False)
+        self.marcoSecciones.config(bg="#aaaaaa")
 
         self.marcoHerramientas = Frame(self.ventana,
                                   height=660)
-        self.marcoHerramientas.config(bg="green")
         self.marcoHerramientas.pack_propagate(False)
         self.marcoHerramientas.pack(fill=X, side=BOTTOM)
         self.marcoSecciones.pack(fill=X)
@@ -67,7 +67,7 @@ class Programa:
 
         Label(self.marcoSecciones,
               textvariable=self.textoSeccion,
-              font=("Arial", 25)
+              font=("Arial", 25), bg="#aaaaaa"
               ).pack(anchor=CENTER)
 
 

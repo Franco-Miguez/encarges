@@ -46,7 +46,6 @@ class SeccionProductos:
 
 
         self.marcoBotones = Frame(self.marco, height=50)
-        self.marcoBotones.config(bg="grey")
         self.marcoBotones.pack(side=BOTTOM, fill=X, pady=40)
 
         self.botonAgregar = Button(self.marcoBotones, text="Agregar",
@@ -104,10 +103,20 @@ class SeccionProductos:
             ms.showinfo("Cuidado", "No a seleccionado ningun\nelemento de la lista")
 
     def buscar(self):
-        print(self.conector.buscar("productos",
-                                   "nombre",
-                                   self.valorBuscar.get()
-                                   ))
+        self.lista.delete(*self.lista.get_children())
+        if len(self.valorBuscar.get()) > 0:
+            nuevaLista = self.conector.buscar("productos",
+                                       "nombre",
+                                       self.valorBuscar.get()
+                                       )
+            for producto in nuevaLista:
+                self.lista.insert("", END,
+                                  text=producto[1],
+                                  values=(producto[3],
+                                  self.acortarTexto(producto[2],40),
+                                  producto[4]))
+        else:
+            self.actualizarLista()
 
     def selecionadoInfo(self):
         info = [self.lista.selection()[0]]

@@ -47,7 +47,7 @@ class Conector:
         return (cursor.fetchall())
 
     def buscar(self, tabla, columna, valor):
-        sql = f"SELECT * FROM {tabla} WHERE {columna} LINK '%{valor}%'"
+        sql = f"SELECT * FROM {tabla} WHERE {columna} LIKE '%{valor}%'"
         cursor.execute(sql)
         return (cursor.fetchall())
 
